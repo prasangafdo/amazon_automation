@@ -28,6 +28,10 @@ public class UserNavigation {
         landing.setBooksTitles();
         return landing.getBookNameOfTheSecondBook();
     }
+    public static void navigateToBookDescription(){
+        landing.navigateToBookDescription();
+    }
+
 
     public static void closeBrowser(){
         landing.closeBrowser();

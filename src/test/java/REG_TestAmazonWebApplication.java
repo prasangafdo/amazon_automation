@@ -21,6 +21,8 @@ public class REG_TestAmazonWebApplication {
         UserNavigation.searchByKeyword(searchKeyword);
         UserNavigation.selectReviewFourAndUp();
         System.out.println("====>"+UserNavigation.getSecondBookName());
+        UserNavigation.navigateToBookDescription();
+
     ;
 //        softAssert.assertTrue(UserNavigation.isSelectPlanTopicDisplaying(),"Select plan topic is not displaying");
 //        UserNavigation.selectRs2000Plan();

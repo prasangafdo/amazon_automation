@@ -21,9 +21,7 @@ public class LandingPage {
     private final By lblReviewFourAndUp = By.xpath("//section[contains(@aria-label,'4 Stars & Up')]");
     private final By chkBoxEnglish = By.xpath("//li[contains(@aria-label,'English')]//input");
     private final By lblBookTitle = By.xpath("//div[@class='sg-col-inner']//h2");
-    private final By lnk = By.xpath("//div[@class='sg-col-inner']//h2");
-
-    //span[contains(text(),'The Automation Advantage: Embrace the Future of Productivity and Improve Speed, Quality, and Customer Experience Through AI')]/parent::a
+    private final By lnkToSecondBook = By.xpath("//span[contains(text(),'bookname')]/parent::a");
     private List<WebElement> bookTitles = new ArrayList<>();
 
 
@@ -89,7 +87,17 @@ public class LandingPage {
     }
 
     public String getBookNameOfTheSecondBook(){
+        System.out.println("====>"+String.valueOf(lnkToSecondBook).replace("bookname",bookTitles.get(1).getText()));
         return bookTitles.get(1).getText();
+    }
+
+    public void navigateToBookDescription(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); //Remaining waiting time will be handled by the explicit wait with a condition
+        String tempElement = String.valueOf(lnkToSecondBook).replace("bookname",bookTitles.get(1).getText());
+        String[] temp = tempElement.split("By.xpath:");
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(temp[1]))).click();
+//        driver.findElement(By.xpath(tempElement)).click();
+
     }
 
 
