@@ -1,3 +1,4 @@
+import com.amazon.function.Cart;
 import com.amazon.function.Product;
 import com.amazon.function.UserNavigation;
 import org.testng.annotations.AfterMethod;
@@ -31,6 +32,8 @@ public class REG_TestAmazonWebApplication {
 //        System.out.println("Product.getProductTitle()====>"+Product.getProductTitle());
         softAssert.assertEquals(UserNavigation.getSecondBookName(),Product.getProductTitle(),"Names are incorrect");
         Product.selectProductQuantity(2);
+        Product.addToCart();
+        softAssert.assertTrue(Cart.isAddedToCartMessageDisplaying(),"Added to cart message is not displaying properly");
 
     ;
 //        softAssert.assertTrue(UserNavigation.isSelectPlanTopicDisplaying(),"Select plan topic is not displaying");

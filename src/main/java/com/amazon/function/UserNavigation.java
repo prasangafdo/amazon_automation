@@ -4,7 +4,7 @@ package com.amazon.function;
 import com.amazon.page.LandingPage;
 
 public class UserNavigation {
-    static LandingPage landing = new LandingPage();
+    private static final LandingPage landing = new LandingPage();
 
     public static void loadLoginPage(){
         landing.loadLandingPage();

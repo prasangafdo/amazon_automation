@@ -16,5 +16,8 @@ public class Product {
         product.clickOnQuantityDropDown();
         product.selectQuantity(quantity);
     }
+    public static void addToCart(){
+        product.clickOnAddToCartButton();
+    }
 
 }
