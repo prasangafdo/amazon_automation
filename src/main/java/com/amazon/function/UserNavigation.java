@@ -22,16 +22,19 @@ public class UserNavigation {
         landing.selectReviewFourAndUp();
     }
     public static void selectEnglishBooks(){
+        landing.scrollDown();
         landing.selectEnglishBooks();
     }
-    public static String getSecondBookName() throws InterruptedException {
+    public static void setBookTitles() throws InterruptedException {
         landing.setBooksTitles();
+        landing.setBookNameOfTheSecondBook();
+    }
+    public static String getSecondBookName() {
         return landing.getBookNameOfTheSecondBook();
     }
-    public static void navigateToBookDescription(){
+    public static void navigateToBookDescription() throws InterruptedException {
         landing.navigateToBookDescription();
     }
-
 
     public static void closeBrowser(){
         landing.closeBrowser();

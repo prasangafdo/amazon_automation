@@ -5,6 +5,7 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -27,6 +28,7 @@ public class LandingPage {
 
     protected static WebDriver driver;
     private String baseURL = "https://www.amazon.com/ref=nav_logo";
+    private String txtBookTitle;
 
 
     public void loadLandingPage(){
@@ -72,8 +74,10 @@ public class LandingPage {
     }
 
     public void selectEnglishBooks(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(chkBoxEnglish)).click();
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(driver.findElement(chkBoxEnglish)).click().build().perform();
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(chkBoxEnglish)).click();
     }
 
     public void setBooksTitles() throws InterruptedException {
@@ -86,9 +90,14 @@ public class LandingPage {
         return bookTitles;//Created this getter if we needed to access all the values of the books from another class
     }
 
+    public void setBookNameOfTheSecondBook(){
+        String.valueOf(lnkToSecondBook).replace("bookname",bookTitles.get(1).getText());
+        this.txtBookTitle = bookTitles.get(1).getText();
+    }
+
+
     public String getBookNameOfTheSecondBook(){
-        System.out.println("====>"+String.valueOf(lnkToSecondBook).replace("bookname",bookTitles.get(1).getText()));
-        return bookTitles.get(1).getText();
+        return txtBookTitle;
     }
 
     public void navigateToBookDescription(){
@@ -100,6 +109,10 @@ public class LandingPage {
 
     }
 
+    public void scrollDown(){
+        ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,document.body.scrollHeight);");
+
+    }
 
 
     public void closeBrowser(){

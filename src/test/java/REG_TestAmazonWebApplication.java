@@ -1,3 +1,4 @@
+import com.amazon.function.Product;
 import com.amazon.function.UserNavigation;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -20,8 +21,15 @@ public class REG_TestAmazonWebApplication {
         UserNavigation.selectBooksFromDropDown();
         UserNavigation.searchByKeyword(searchKeyword);
         UserNavigation.selectReviewFourAndUp();
-        System.out.println("====>"+UserNavigation.getSecondBookName());
+        UserNavigation.selectEnglishBooks();
+        UserNavigation.setBookTitles();
+//        System.out.println("getSecondBookName====>"+UserNavigation.getSecondBookName());
         UserNavigation.navigateToBookDescription();
+//        System.out.println("====>"+ Product.getUnitPrice());
+//        System.out.println("getProductTitle====>"+ Product.getProductTitle());
+//        System.out.println("getSecondBookName====>"+UserNavigation.getSecondBookName());
+//        System.out.println("Product.getProductTitle()====>"+Product.getProductTitle());
+        softAssert.assertEquals(UserNavigation.getSecondBookName(),Product.getProductTitle(),"Names are incorrect");
 
     ;
 //        softAssert.assertTrue(UserNavigation.isSelectPlanTopicDisplaying(),"Select plan topic is not displaying");
