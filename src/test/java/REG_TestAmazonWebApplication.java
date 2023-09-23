@@ -30,6 +30,7 @@ public class REG_TestAmazonWebApplication {
 //        System.out.println("getSecondBookName====>"+UserNavigation.getSecondBookName());
 //        System.out.println("Product.getProductTitle()====>"+Product.getProductTitle());
         softAssert.assertEquals(UserNavigation.getSecondBookName(),Product.getProductTitle(),"Names are incorrect");
+        Product.selectProductQuantity(2);
 
     ;
 //        softAssert.assertTrue(UserNavigation.isSelectPlanTopicDisplaying(),"Select plan topic is not displaying");

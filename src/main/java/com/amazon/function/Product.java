@@ -12,5 +12,9 @@ public class Product {
     public static String getProductTitle(){
         return product.getProductTitle();
     }
+    public static void selectProductQuantity(int quantity){
+        product.clickOnQuantityDropDown();
+        product.selectQuantity(quantity);
+    }
 
 }
