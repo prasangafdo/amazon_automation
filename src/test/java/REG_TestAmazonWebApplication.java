@@ -1,6 +1,8 @@
 import com.amazon.function.Cart;
 import com.amazon.function.Product;
 import com.amazon.function.UserNavigation;
+import com.amazon.function.Utility;
+import com.amazon.util.BackgroundWorker;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -34,6 +36,14 @@ public class REG_TestAmazonWebApplication {
         Product.selectProductQuantity(2);
         Product.addToCart();
         softAssert.assertTrue(Cart.isAddedToCartMessageDisplaying(),"Added to cart message is not displaying properly");
+        Cart.clickOnGoToCartButton();
+
+        System.out.println("====>"+ Cart.getProductName());
+        System.out.println("quantity====>"+ Cart.getQuantity());
+        System.out.println("sub====>"+ Cart.getSubTotal());
+        Utility.setPrice("$", Double.parseDouble(Product.getUnitPrice()),2);
+//        System.out.println("util math"+Utility.getPrice());
+        softAssert.assertEquals(Cart.getSubTotal(),Utility.getPrice(),"Price calculation error");
 
     ;
 //        softAssert.assertTrue(UserNavigation.isSelectPlanTopicDisplaying(),"Select plan topic is not displaying");

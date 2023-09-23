@@ -14,9 +14,15 @@ public class ProductPage extends LandingPage{
     private final By drpDwnQuantityValue = By.xpath("//li[@aria-labelledby='quantity_val']/a");
     private final By btnAddToCart = By.xpath("//input[@id='add-to-cart-button']");
 
+    private String unitPrice;
+
+    public void setUnitPrice(){
+        this.unitPrice = driver.findElement(lblUnitPrice).getText();
+        unitPrice = unitPrice.replace("$",""); //Removing currency indicator
+    }
 
     public String getUnitPrice(){
-        return driver.findElement(lblUnitPrice).getText();
+        return unitPrice;
     }
     public String getProductTitle(){
         return driver.findElement(lblProductTitle).getText();

@@ -10,9 +10,11 @@ public class Product {
         return product.getUnitPrice();
     }
     public static String getProductTitle(){
+        product.setUnitPrice();
         return product.getProductTitle();
     }
     public static void selectProductQuantity(int quantity){
+        product.setUnitPrice();
         product.clickOnQuantityDropDown();
         product.selectQuantity(quantity);
     }
