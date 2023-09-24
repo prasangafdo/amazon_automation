@@ -1,10 +1,10 @@
 # amazon_automation
 Amazon test automation assessment requested by Swivel Group
 
-This project is created based on Selenium, Java, TestNG, Maven technologies.
+This project is created based on Selenium, Java, TestNG and Maven technologies.
 
 ##Project Structure
-Project framework is based on Page Object Model.
+* Project framework is based on Page Object Model.
 1. Page objects are stored in page folder. (CartPage, LandingPage, ProductPage)
 2. Actual test files are stored in test folder.
 3. Connection between page files and test files are handled by the function classes.
@@ -17,8 +17,8 @@ Project framework is based on Page Object Model.
    3. Purpose of this class to reduce the workload of the other classes and handle the backend tasks separately.
 2. Property file reader - This class contains methods to read data from external property files.
    1. Property files can be found under the resources folder.
-      1. config.properties - this file contains configurations related to the browser.
-      2. testdata.properties - this file contains configuration specified to the test cases.
+      * config.properties - this file contains configurations related to the browser.
+      * testdata.properties - this file contains configuration specified to the test cases.
 
 ###Test reports
 1. Reports are getting handled by TestNG as default.

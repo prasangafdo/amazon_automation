@@ -8,8 +8,6 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-import java.util.logging.Logger;
-
 public class REG_TestAmazonWebApplication {
 
     private final String searchKeyword = PropertyFileReader.getTestDataValue("searchkeyword");
