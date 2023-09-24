@@ -11,12 +11,18 @@ import java.util.ResourceBundle;
 
 public class PropertyFileReader {
 
-    public static String getValue(String keyword) throws MalformedURLException {
+    public static String getValue(String keyword) {
 
         File file = new File("src/main/resources");
-        URL[] urls = {file.toURI().toURL()};
+        URL[] urls = new URL[0];
+        try {
+            urls = new URL[]{file.toURI().toURL()};
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+            System.out.println("===> File not found");
+        }
         ClassLoader loader = new URLClassLoader(urls);
-        ResourceBundle resourceBundle = ResourceBundle.getBundle("test", Locale.getDefault(), loader);
+        ResourceBundle resourceBundle = ResourceBundle.getBundle("config", Locale.getDefault(), loader);
 
         return resourceBundle.getString(keyword);
     }

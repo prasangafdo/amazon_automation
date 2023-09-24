@@ -17,7 +17,7 @@ public class CartPage extends LandingPage{
 
     private final String txtAddedToCartMessage = "Added to Cart";
 
-    public boolean isAddedToCartMessageDisplaying(){ //not working. need to check
+    public boolean isAddedToCartMessageDisplaying(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
        return wait.until(ExpectedConditions.visibilityOfElementLocated(lblAddedToCart)).getText().contains(txtAddedToCartMessage);
        //Using contains keyword instead of equals or equalsIgnoreCase to overcome the issues related to empty spaces when capturing text content from a web element

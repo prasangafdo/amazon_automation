@@ -8,7 +8,8 @@ import java.time.Duration;
 
 public class ProductPage extends LandingPage{
 
-    private final By lblUnitPrice = By.xpath("//div[@id='booksHeaderSection']//*[contains(text(),'$')] | //span[contains(@class,'a-text-price')]|//div[@id='corePriceDisplay_desktop_feature_div']//following-sibling::span[contains(@class,'priceToPay')]");
+//    private final By lblUnitPrice = By.xpath("//div[@id='booksHeaderSection']//*[contains(text(),'$')] | //span[contains(@class,'a-text-price')]|//div[@id='corePriceDisplay_desktop_feature_div']//following-sibling::span[contains(@class,'priceToPay')]| //span[@id='price']");
+    private final By lblUnitPrice = By.xpath("//span[@class='a-size-base a-color-price a-color-price']");
     private final By lblProductTitle = By.xpath("//span[@id='productTitle']");
     private final By drpDwnQuantity = By.xpath("//span[@class='a-dropdown-container']");
     private final By drpDwnQuantityValue = By.xpath("//li[@aria-labelledby='quantity_val']/a");

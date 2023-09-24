@@ -3,6 +3,7 @@ import com.amazon.function.Product;
 import com.amazon.function.UserNavigation;
 import com.amazon.function.Utility;
 import com.amazon.util.BackgroundWorker;
+import com.amazon.util.PropertyFileReader;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,7 +11,7 @@ import org.testng.asserts.SoftAssert;
 
 public class REG_TestAmazonWebApplication {
 
-    private String searchKeyword = "automation";
+    private final String searchKeyword = PropertyFileReader.getValue("searchkeyword");
 
     @BeforeMethod
     public void loadLandingPage(){
@@ -26,14 +27,9 @@ public class REG_TestAmazonWebApplication {
         UserNavigation.selectReviewFourAndUp();
         UserNavigation.selectEnglishBooks();
         UserNavigation.setBookTitles();
-//        System.out.println("getSecondBookName====>"+UserNavigation.getSecondBookName());
         UserNavigation.navigateToBookDescription();
-//        System.out.println("====>"+ Product.getUnitPrice());
-//        System.out.println("getProductTitle====>"+ Product.getProductTitle());
-//        System.out.println("getSecondBookName====>"+UserNavigation.getSecondBookName());
-//        System.out.println("Product.getProductTitle()====>"+Product.getProductTitle());
         softAssert.assertEquals(UserNavigation.getSecondBookName(),Product.getProductTitle(),"Names are incorrect");
-        Product.selectProductQuantity(2);
+        Product.selectProductQuantity(Integer.parseInt(PropertyFileReader.getValue("quantity")));
         Product.addToCart();
         softAssert.assertTrue(Cart.isAddedToCartMessageDisplaying(),"Added to cart message is not displaying properly");
         Cart.clickOnGoToCartButton();
@@ -44,18 +40,11 @@ public class REG_TestAmazonWebApplication {
         System.out.println("sub====>"+ Cart.getSubTotal());
         System.out.println("product uni price double cast====>"+Double.parseDouble(Product.getUnitPrice()));
 
-        Utility.setPrice("$", Double.parseDouble(Product.getUnitPrice()),2);
-//        System.out.println("util math"+Utility.getPrice());
+        Utility.setPrice(PropertyFileReader.getValue("currencytype"), Double.parseDouble(Product.getUnitPrice()),2);
         softAssert.assertEquals(Cart.getSubTotal(),Utility.getPrice(),"Price calculation error");
         Cart.deleteProduct();
         System.out.println("sub====>"+ Cart.getSubTotal());
-        softAssert.assertEquals(Cart.getSubTotal(),"$0.00", "Shopping cart value has not been cleared");
-
-
-    ;
-//        softAssert.assertTrue(UserNavigation.isSelectPlanTopicDisplaying(),"Select plan topic is not displaying");
-//        UserNavigation.selectRs2000Plan();
-//        softAssert.assertTrue(UserLogin.isLoginButtonDisplaying(),"Login page is not displaying");
+        softAssert.assertEquals(Cart.getSubTotal(),PropertyFileReader.getValue("cartresetvalue"), "Shopping cart value has not been cleared");
         softAssert.assertAll();
     }
 

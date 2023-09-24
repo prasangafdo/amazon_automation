@@ -7,7 +7,7 @@ public class UserNavigation {
     private static final LandingPage landing = new LandingPage();
 
     public static void loadLoginPage(){
-        landing.loadLandingPage();
+        landing.loadLandingPage("edge");
     }
     public static boolean isAmazonLogoDisplaying(){
         return landing.isAmazonLogoDisplaying();
