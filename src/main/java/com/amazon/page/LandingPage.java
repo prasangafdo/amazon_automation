@@ -101,7 +101,7 @@ public class LandingPage {
     }
 
     public void navigateToBookDescription(){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); //Remaining waiting time will be handled by the explicit wait with a condition
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); //Waiting time will be handled by the explicit wait with a condition
         String tempElement = String.valueOf(lnkToSecondBook).replace("bookname",bookTitles.get(1).getText());
         String[] temp = tempElement.split("By.xpath:");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(temp[1]))).click();

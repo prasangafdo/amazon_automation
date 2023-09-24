@@ -32,7 +32,7 @@ public class UserNavigation {
     public static String getSecondBookName() {
         return landing.getBookNameOfTheSecondBook();
     }
-    public static void navigateToBookDescription() throws InterruptedException {
+    public static void navigateToBookDescription() {
         landing.navigateToBookDescription();
     }
 
