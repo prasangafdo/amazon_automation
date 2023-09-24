@@ -6,8 +6,8 @@ import com.amazon.page.LandingPage;
 public class UserNavigation {
     private static final LandingPage landing = new LandingPage();
 
-    public static void loadLoginPage(){
-        landing.loadLandingPage("edge");
+    public static void loadLoginPage(String browser){
+        landing.loadLandingPage(browser);
     }
     public static boolean isAmazonLogoDisplaying(){
         return landing.isAmazonLogoDisplaying();

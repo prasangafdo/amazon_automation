@@ -2,20 +2,16 @@ package com.amazon.page;
 
 
 import com.amazon.util.BackgroundWorker;
-import com.amazon.util.PropertyFileReader;
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.net.MalformedURLException;
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LandingPage extends BackgroundWorker {
 
@@ -28,6 +24,7 @@ public class LandingPage extends BackgroundWorker {
     private final By lnkToSecondBook = By.xpath("//span[contains(text(),'bookname')]/parent::a");
     private List<WebElement> bookTitles = new ArrayList<>();
 
+    private static Logger logger = Logger.getLogger(LandingPage.class.getName());
 
     private String txtBookTitle;
 
@@ -42,31 +39,32 @@ public class LandingPage extends BackgroundWorker {
         //Selecting books from drop down
         Select selectCategory = new Select(driver.findElement(drpDwnSearch));
         selectCategory.selectByValue("search-alias=stripbooks-intl-ship");
-
     }
 
     public void searchByKeyword(String keyword){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfElementLocated(txtSearch)).sendKeys(keyword);
         driver.findElement(txtSearch).sendKeys(Keys.RETURN);
+        logger.log(Level.INFO,"Searching book by keyword: ".concat(keyword));
     }
 
     public void selectReviewFourAndUp(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         wait.until(ExpectedConditions.visibilityOfElementLocated(lblReviewFourAndUp)).click();
+        logger.log(Level.INFO,"Selecting reviews 4 and up");
     }
 
     public void selectEnglishBooks(){
-//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         Actions actions = new Actions(driver);
         actions.moveToElement(driver.findElement(chkBoxEnglish)).click().build().perform();
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(chkBoxEnglish)).click();
+        logger.log(Level.INFO,"Selecting English books");
     }
 
     public void setBooksTitles() throws InterruptedException {
         Thread.sleep(2000); //Hard pause of 2 seconds to wait for the page to refresh after applying the filter.
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30)); //Remaining waiting time will be handled by the explicit wait with a condition
         bookTitles = wait.until(ExpectedConditions.elementToBeClickable(lblBookTitle)).findElements(lblBookTitle);
+        logger.log(Level.INFO,"Gathering names of all books");
     }
 
     public List<WebElement> getBooksList(){
@@ -88,6 +86,7 @@ public class LandingPage extends BackgroundWorker {
         String tempElement = String.valueOf(lnkToSecondBook).replace("bookname",bookTitles.get(1).getText());
         String[] temp = tempElement.split("By.xpath:");
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(temp[1]))).click();
+        logger.log(Level.INFO,"Selected the second book and currently in it's description page");
     }
 
 

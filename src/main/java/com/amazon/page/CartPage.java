@@ -5,6 +5,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CartPage extends LandingPage{
 
@@ -16,6 +18,7 @@ public class CartPage extends LandingPage{
     private final By lblSubTotal = By.xpath("//span[@id='sc-subtotal-amount-activecart']");
 
     private final String txtAddedToCartMessage = "Added to Cart";
+    private static final Logger logger = Logger.getLogger(CartPage.class.getName());
 
     public boolean isAddedToCartMessageDisplaying(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
@@ -44,7 +47,7 @@ public class CartPage extends LandingPage{
     public void clickOnDeleteButton(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(btnDelete)).click();
-    }
+        logger.log(Level.INFO, "Product removed from the shopping cart");    }
 
 
 }

@@ -5,10 +5,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ProductPage extends LandingPage{
 
-//    private final By lblUnitPrice = By.xpath("//div[@id='booksHeaderSection']//*[contains(text(),'$')] | //span[contains(@class,'a-text-price')]|//div[@id='corePriceDisplay_desktop_feature_div']//following-sibling::span[contains(@class,'priceToPay')]| //span[@id='price']");
     private final By lblUnitPrice = By.xpath("//span[@class='a-size-base a-color-price a-color-price']");
     private final By lblProductTitle = By.xpath("//span[@id='productTitle']");
     private final By drpDwnQuantity = By.xpath("//span[@class='a-dropdown-container']");
@@ -16,6 +17,7 @@ public class ProductPage extends LandingPage{
     private final By btnAddToCart = By.xpath("//input[@id='add-to-cart-button']");
 
     private String unitPrice;
+    private static Logger logger = Logger.getLogger(LandingPage.class.getName());
 
     public void setUnitPrice(){
         this.unitPrice = driver.findElement(lblUnitPrice).getText();
@@ -35,10 +37,12 @@ public class ProductPage extends LandingPage{
         String tempElement = String.valueOf(drpDwnQuantityValue).replace("val", String.valueOf(quantity-1));
         String[] temp = tempElement.split("By.xpath:");
         driver.findElement(By.xpath(temp[1])).click();
+        //Adding correct quantity to xpath
     }
     public void clickOnAddToCartButton(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.elementToBeClickable(btnAddToCart)).click();
+        logger.log(Level.INFO, "Product added to the cart");
     }
 
 

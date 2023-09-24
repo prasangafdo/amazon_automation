@@ -9,13 +9,12 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
-import org.openqa.selenium.ie.InternetExplorerOptions;
 
 public class BackgroundWorker {
 
     private String price;
     protected static WebDriver driver;
-    private final String baseURL = PropertyFileReader.getValue("baseurl");
+    private final String baseURL = PropertyFileReader.getConfigValue("baseurl");
 
     public void setPrice(String currency, double price, int quantity){
         this.price = currency+ price*quantity;
@@ -27,24 +26,20 @@ public class BackgroundWorker {
         ((JavascriptExecutor)driver).executeScript("window.scrollTo(0,document.body.scrollHeight);");
     }
     public void loadLandingPage(String browser){
-   /*
-*/
         switch (browser) {
             case "chrome": {
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions options = new ChromeOptions();
-//        options.addArguments("--headless");
+//        options.addArguments("--headless");  //Uncomment this to run headless
                 options.addArguments("--remote-allow-origins=*");
                 driver = new ChromeDriver(options);
                 driver.get(baseURL);
                 driver.manage().window().maximize();
-//        driver.navigate().refresh();
                 break;
             }
             case "edge": {
                 WebDriverManager.edgedriver().setup();
                 EdgeOptions options = new EdgeOptions();
-//        options.addArguments("--headless");
                 options.addArguments("--remote-allow-origins=*");
                 driver = new EdgeDriver(options);
                 driver.get(baseURL);
@@ -64,6 +59,15 @@ public class BackgroundWorker {
                 driver.manage().window().maximize();
                 break;
         }
+    }
+
+    //Below methods are used to manage the browser window separately if needed
+    public void maximizeBrowser(){
+        driver.manage().window().maximize();
+    }
+
+    public void minimizeBrowser(){
+        driver.manage().window().minimize();
     }
 
 }
