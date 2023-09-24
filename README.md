@@ -44,8 +44,9 @@ This project is created based on Selenium, Java, TestNG and Maven technologies.
 
 ###Known issues
 1. Since this is an ecommerce application, sometimes it might ask to enter a captcha when the page is loading. If that happens, please manually enter the captcha then it will continue the automation job run.
-2. Due to microsoft restrictions, it does not allow to use the Microsoft Explorer on some devices. In those scenarios it will open Microsoft Edge instead on IE. This cannot be fixed unless we download and install IE driver for Selenium manually. 
+2. Due to microsoft restrictions, it does not allow to use the Microsoft Explorer on some devices. In those scenarios it will open Microsoft Edge instead of IE. So the application might not run as expected since Selenium is waiting for IE but Windows has opened Edge. This cannot be fixed unless we download and install IE driver for Selenium manually. 
 
 ###Challenges and issues faced
 1. Selecting the checkboxes was an issue at the beginning, but I was able to overcome that with Mouse Actions.
-2. Locating the elements and synchronizing the application with the automation tool was the major problem. I had to use some uncoditional waits and conditional waits as well.
+2. Locating the elements and synchronizing the application with the automation tool was the major problem. I had to use some unconditional waits and conditional waits as well.
+3. As mentioned earlier captcha was a big issue. But it required to be submitted only once, so currently the user has to enter the captcha manually if that screen appears.
