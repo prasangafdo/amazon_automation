@@ -39,11 +39,18 @@ public class REG_TestAmazonWebApplication {
         Cart.clickOnGoToCartButton();
 
         System.out.println("====>"+ Cart.getProductName());
+        System.out.println("product uni price====>"+ Product.getUnitPrice());
         System.out.println("quantity====>"+ Cart.getQuantity());
         System.out.println("sub====>"+ Cart.getSubTotal());
+        System.out.println("product uni price double cast====>"+Double.parseDouble(Product.getUnitPrice()));
+
         Utility.setPrice("$", Double.parseDouble(Product.getUnitPrice()),2);
 //        System.out.println("util math"+Utility.getPrice());
         softAssert.assertEquals(Cart.getSubTotal(),Utility.getPrice(),"Price calculation error");
+        Cart.deleteProduct();
+        System.out.println("sub====>"+ Cart.getSubTotal());
+        softAssert.assertEquals(Cart.getSubTotal(),"$0.00", "Shopping cart value has not been cleared");
+
 
     ;
 //        softAssert.assertTrue(UserNavigation.isSelectPlanTopicDisplaying(),"Select plan topic is not displaying");
@@ -53,8 +60,9 @@ public class REG_TestAmazonWebApplication {
     }
 
 
-   // @AfterMethod
-    public void closeBrowser(){
+    @AfterMethod
+    public void closeBrowser() throws InterruptedException {
+        Thread.sleep(5000);
         UserNavigation.closeBrowser();
     }
 }
