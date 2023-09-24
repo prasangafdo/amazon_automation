@@ -11,15 +11,13 @@ import java.util.ResourceBundle;
 
 public class PropertyFileReader {
 
-
-
-    public static void main(String[] args ) throws MalformedURLException {
+    public static String getValue(String keyword) throws MalformedURLException {
 
         File file = new File("src/main/resources");
         URL[] urls = {file.toURI().toURL()};
         ClassLoader loader = new URLClassLoader(urls);
         ResourceBundle resourceBundle = ResourceBundle.getBundle("test", Locale.getDefault(), loader);
 
-        String a = resourceBundle.getString("user");
+        return resourceBundle.getString(keyword);
     }
 }
